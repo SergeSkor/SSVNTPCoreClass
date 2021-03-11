@@ -56,12 +56,13 @@ class SSVNTPCoreClass
     void setServerName(uint8_t index, const char* ServerName); //index [0,1,2]
     void setServerName(const char* server1,  const char* server2 = nullptr, const char* server3 = nullptr);
     
-    bool WaitForFirstUpdate(uint32_t timeout_mS=5000, bool showProgress=false);
+    bool WaitForFirstUpdate(uint32_t timeout_mS=5000, bool showProgress=false);  //sometime is not updated! Call ForceUpdate() required!
     const char* getTZString();
     void setTZString(const char* tzString, bool autoUpdate=false); //if no autoUpdate - call begin() needed to update;
 
     void refreshCache();
     void fixStopUpdating();
+    void ForceUpdate();  //added 2/15/2021
     
     struct tm* getTimeInfoStruct();
     time_t getTimeNow(); //added 12/9/2020

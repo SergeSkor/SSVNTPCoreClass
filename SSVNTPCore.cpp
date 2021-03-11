@@ -122,7 +122,7 @@ void SSVNTPCoreClass::setServerName(const char* server1,  const char* server2, c
   _ServerName3 = server3;
 }
 
-bool SSVNTPCoreClass::WaitForFirstUpdate(uint32_t timeout_mS, bool showProgress)
+bool SSVNTPCoreClass::WaitForFirstUpdate(uint32_t timeout_mS, bool showProgress)  //sometime is not updated! Call ForceUpdate() required!
 {
 ////////////////////////
 uint32_t aa=millis();
@@ -183,6 +183,10 @@ if (  (NowIs - getLastUpdate()) >= (getUpdateInterval() + 100000) )  //if update
   }
 }
 
+void SSVNTPCoreClass::ForceUpdate()   //added 2/15/2021
+{
+  configTime(_TZString, _ServerName1, _ServerName2 , _ServerName3);
+}
 
 struct tm* SSVNTPCoreClass::getTimeInfoStruct()
 {
